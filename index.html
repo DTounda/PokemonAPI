@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Find Your Pokemon</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header class="top">
+        <h1>Your Pokemon</h1>
+        <input
+            id="search"
+            type="search"
+            placeholder="Search by name"
+            aria-label="Search Pokemon by name"
+            autocomplete="off">
+    </header>
+
+    <main>
+        <p id="message" aria-live="polite">Loading Pokemon...</p>
+        <section id="grid" class="grid" aria-label="Pokemon list"></section>
+    </main>
+
+    <nav class="pager" aria-label="Pages">
+        <button id="prev" disabled>Previous</button>
+        <span id="page-info"></span>
+        <button id="next" disabled>Next</button>
+    </nav>
+</body>
+
+<script src="script.js"></script>
+</html>

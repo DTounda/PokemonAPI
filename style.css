@@ -1,0 +1,235 @@
+:root {
+    --bg: #e8f0ec;
+    --ink: #1d2b24;
+    --card: #ffffff;
+    --accent: #1f6f5c;
+    --accent-dark: #17503f;
+    --line: #c5d6cd;
+    --type: #a8a878; /* default card color, replaced per type below */
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+}
+
+/* ---------- Title + search ---------- */
+.top {
+    display: grid;
+    justify-items: center;
+    gap: 12px;
+    padding: 24px 16px 8px;
+}
+
+.top h1 {
+    margin: 0;
+    font-size: clamp(28px, 6vw, 40px);
+}
+
+#search {
+    width: min(560px, 100%);
+    padding: 12px 16px;
+    font-size: 18px;
+    border: 2px solid var(--line);
+    border-radius: 8px;
+    background: var(--card);
+    color: var(--ink);
+}
+
+#search:focus-visible {
+    outline: 3px solid var(--accent);
+    outline-offset: 2px;
+}
+
+/* ---------- Message ---------- */
+#message {
+    margin: 16px auto;
+    max-width: 700px;
+    min-height: 1.5em;
+    padding: 0 16px;
+    text-align: center;
+    font-size: 18px;
+}
+
+/* ---------- Grid of cards ---------- */
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 16px;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 8px 16px 24px;
+}
+
+.card {
+    position: relative;
+    display: grid;
+    justify-items: center;
+    align-content: start;
+    gap: 6px;
+    padding: 12px 12px 16px;
+    background: var(--card);
+    background: color-mix(in srgb, var(--type) 16%, white);
+    border: 2px solid var(--type);
+    border-top-width: 8px;
+    border-radius: 8px;
+    overflow: hidden;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.card:hover,
+.card:focus-within {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.15);
+}
+
+.card.selected {
+    box-shadow: 0 0 0 3px var(--accent);
+}
+
+.card img {
+    width: 120px;
+    height: 120px;
+    object-fit: contain;
+}
+
+.card h2 {
+    margin: 0;
+    font-size: 18px;
+    text-transform: capitalize;
+}
+
+/* Types */
+.types {
+    display: grid;
+    grid-auto-flow: column;
+    gap: 6px;
+}
+
+.type-badge {
+    padding: 2px 10px;
+    font-size: 13px;
+    text-transform: capitalize;
+    background: #fff;
+    border: 2px solid var(--type);
+    border-radius: 999px;
+}
+
+.stats {
+    margin: 0;
+    font-size: 13px;
+}
+
+/* Button inside every card */
+.card button {
+    margin-top: 6px;
+    padding: 8px 20px;
+    font: inherit;
+    font-size: 15px;
+    color: #fff;
+    background: var(--accent);
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.card button:hover {
+    background: var(--accent-dark);
+}
+
+.card button:focus-visible {
+    outline: 3px solid var(--ink);
+    outline-offset: 2px;
+}
+
+/* Hover tag: name + "Choose me" */
+.hover-tag {
+    position: absolute;
+    top: 8px;
+    left: 8px;
+    right: 8px;
+    padding: 4px 8px;
+    font-size: 13px;
+    text-align: center;
+    color: #fff;
+    background: var(--ink);
+    border-radius: 6px;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s;
+}
+
+.card:hover .hover-tag,
+.card:focus-within .hover-tag {
+    opacity: 1;
+}
+
+/* ---------- Colors by type ---------- */
+.type-normal   { --type: #a8a878; }
+.type-fire     { --type: #f08030; }
+.type-water    { --type: #6890f0; }
+.type-electric { --type: #f8d030; }
+.type-grass    { --type: #78c850; }
+.type-ice      { --type: #98d8d8; }
+.type-fighting { --type: #c03028; }
+.type-poison   { --type: #a040a0; }
+.type-ground   { --type: #e0c068; }
+.type-flying   { --type: #a890f0; }
+.type-psychic  { --type: #f85888; }
+.type-bug      { --type: #a8b820; }
+.type-rock     { --type: #b8a038; }
+.type-ghost    { --type: #705898; }
+.type-dragon   { --type: #7038f8; }
+.type-dark     { --type: #705848; }
+.type-steel    { --type: #b8b8d0; }
+.type-fairy    { --type: #ee99ac; }
+
+/* ---------- Previous / Next ---------- */
+.pager {
+    display: grid;
+    grid-auto-flow: column;
+    justify-content: center;
+    align-items: center;
+    gap: 16px;
+    padding: 16px;
+    border-top: 2px solid var(--line);
+}
+
+.pager button {
+    padding: 10px 24px;
+    font: inherit;
+    font-size: 16px;
+    color: #fff;
+    background: var(--accent);
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.pager button:hover:not(:disabled) {
+    background: var(--accent-dark);
+}
+
+.pager button:disabled {
+    background: var(--line);
+    color: #6b7b73;
+    cursor: not-allowed;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .card,
+    .card button,
+    .hover-tag {
+        transition: none;
+    }
+}
